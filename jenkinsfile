@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    //Variables de entorno 
+    enviroment {
+        AWS_ACCESS_KEY_ID=credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY=credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_REGION='us-east-1'
+    }
+    
+    stages {
+        stage('Bienvenidos, creación de una IAC utilizando Terraform en AWS.'){
+            steps {
+                echo('Demostración de creación de IAC por medion de Terraform en AWS')
+            }
+        }
+        stage('Crear la infraestructura con Terraform en AWS'){
+            steps {
+                sh 'terraform init'
+                sh 'terraform plan'
+                sh 'terraform apply -auto-approve'
+            }
+        }
+    }
+}
